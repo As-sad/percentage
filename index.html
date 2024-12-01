@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentage Calculator</title>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url(../claculator\ image.jpeg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.box {
+    background-color: #c2f381;
+    border-radius: 10px;
+    padding: 30px;
+    width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 2px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+.box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #555;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    border-color: #28a745;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+#result.excellent {
+    color: green;
+}
+
+#result.good {
+    color: #28a745;
+}
+
+#result.average {
+    color: orange;
+}
+
+#result.passable {
+    color: #ffc107;
+}
+
+#result.fail {
+    color: red;
+}
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="box">
+            <h2>Percentage Calculator</h2>
+            <label for="obtainedMarks">Obtained Marks:</label>
+            <input  id="obtainedMarks" >
+            <label for="totalMarks">Total Marks:</label>
+            <input  id="totalMarks" >
+            <button onclick="calculatePercentage()">Calculate</button>
+
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        function calculatePercentage() {
+    let obtainedMarks = document.getElementById("obtainedMarks").value;
+    let totalMarks = document.getElementById("totalMarks").value;
+
+    if (obtainedMarks === "" || totalMarks === "") {
+        alert("Please enter the number.");
+        return;
+    }
+
+    obtainedMarks = parseFloat(obtainedMarks);
+    totalMarks = parseFloat(totalMarks);
+
+    if (isNaN(obtainedMarks) || isNaN(totalMarks)) {
+        alert("Please enter valid numbers.");
+        return;
+    }
+
+    if (totalMarks <= 0) {
+        alert("Total marks should be greater than zero.");
+        return;
+    }
+    let percentage = (obtainedMarks / totalMarks) * 100;
+    let resultMessage = "";
+
+    switch (true) {
+            case (percentage >= 85):
+                resultMessage = `congrats you got A+ grade with ${percentage.toFixed(2)}%`;
+                break;
+            case (percentage >= 75):
+                resultMessage = `congrats you got A grade with ${percentage.toFixed(2)}%`
+                break;
+            case(percentage>=70):
+                resultMessage = `congrats you got B+ grade with ${percentage.toFixed(2)}%`;
+                break
+            case (percentage >= 60):
+                resultMessage = `congrats you got D+ grade with ${percentage.toFixed(2)}%`;
+                break;
+            case (percentage >= 50):
+                resultMessage = `congrats you got D grade with with ${percentage.toFixed(2)}%`;
+                break;
+            default:
+                resultMessage = `Sorry, you failed with ${percentage.toFixed(2)}%`;
+                break;
+        }
+    document.getElementById("result").innerHTML = resultMessage;
+}
+    
+    </script>
+</body>
+</html>
